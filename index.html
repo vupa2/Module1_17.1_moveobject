@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>[Bài tập] Game đơn giản - di chuyển đối tượng</title>
+</head>
+<body>
+  <div id="game"></div>
+  
+  <script>
+    function Hero(image, top, left, size, speed) {
+      this.image = image;
+      this.top = top;
+      this.left = left;
+      this.size = size;
+      this.speed = speed;
+      this.direction = 'right';
+      
+      this.getHeroElement = function() {
+        return '<img width="'+ this.size + '"' +
+          ' height="'+ this.size + '"' +
+          ' src="' + this.image +'"' +
+          ' style="top: ' + this.top + 'px; left: ' + this.left + 'px; position: absolute;"  alt="bulbasaur"/>';
+      }
+      
+      this.moveRight = function () {
+        this.left += this.speed;
+        console.log('ok: ' + this.left, window.innerWidth - hero.size);
+      }
+  
+      this.moveLeft = function () {
+        this.left -= this.speed;
+        console.log('ok: ' + this.left);
+      }
+      
+      this.moveDown = function () {
+        this.top -= this.speed;
+      }
+      
+      this.moveUp = function () {
+        this.top += this.speed;
+      }
+    }
+    
+    const hero = new Hero('Bulbasaur.png', 0, 0, 100, 20);
+    
+    function start() {
+      if (hero.left + hero.size < window.innerWidth) {
+        hero.moveRight();
+      } else if (hero.left + hero.size > window.innerWidth) {
+        hero.moveLeft();
+      }
+      
+      document.getElementById('game').innerHTML = hero.getHeroElement();
+      setTimeout(start, 500);
+    }
+    
+    start();
+  </script>
+</body>
+</html>
